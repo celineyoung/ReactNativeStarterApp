@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TextInput } from "react-native";
+import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 import { createStackNavigator } from "react-navigation";
 
 class LoginScreen extends React.Component {
@@ -16,6 +16,10 @@ class LoginScreen extends React.Component {
       <View style={styles.container}>
         <Text style={styles.nameMessage}>What is your name?</Text>
         <TextInput style={styles.body}>Name: </TextInput>
+        <Button
+          title="Enter"
+          onPress={() => this.props.navigation.navigate('Home') }
+        />
       </View>
     );
   }
@@ -24,8 +28,9 @@ class LoginScreen extends React.Component {
 class HomeScreen extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>Details Screen</Text>
+      <View style={styles.container}>
+        <Text style={styles.nameMessage}>Welcome to SWEN 325!</Text>
+        <Text style={styles.body}>You must be Alex Potanin</Text>
       </View>
     );
   }
@@ -59,6 +64,6 @@ const styles = StyleSheet.create({
     color: "#000000"
   },
   body: {
-    marginBottom: 10
+    marginLeft: 10
   }
 });
