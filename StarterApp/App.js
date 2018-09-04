@@ -4,21 +4,42 @@
  *
  * @format
  * @flow
+ *
+ * underlineColorAndroid="#000000"
  */
 
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 import { createStackNavigator } from "react-navigation";
+import { TextField } from "react-native-material-textfield";
 
 class LoginScreen extends React.Component {
+  static navigationOptions = {
+    title: "Login"
+  };
+
+  constructor(props) {
+    super(props);
+    this.state = { text: "" };
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.nameMessage}>What is your name?</Text>
-        <TextInput style={styles.body}>Name: </TextInput>
+        <TextField
+          style={styles.body}
+          label="Name:"
+          onChangeText={text => this.setState({ text })}
+        />
         <Button
+          style={{marginLeft: 10, marginRight: 10}}
           title="Enter"
-          onPress={() => this.props.navigation.navigate('Home') }
+          onPress={() => {
+            this.props.navigation.navigate("Home", {
+              name: this.state.text
+            });
+          }}
         />
       </View>
     );
@@ -26,11 +47,18 @@ class LoginScreen extends React.Component {
 }
 
 class HomeScreen extends React.Component {
+  static navigationOptions = {
+    title: "Home"
+  };
+
   render() {
+    const { navigation } = this.props;
+    const name = navigation.getParam("name");
+
     return (
       <View style={styles.container}>
         <Text style={styles.nameMessage}>Welcome to SWEN 325!</Text>
-        <Text style={styles.body}>You must be Alex Potanin</Text>
+        <Text style={styles.body}>You must be {name}</Text>
       </View>
     );
   }
@@ -64,6 +92,7 @@ const styles = StyleSheet.create({
     color: "#000000"
   },
   body: {
-    marginLeft: 10
+    marginLeft: 10,
+    marginRight: 10
   }
 });
