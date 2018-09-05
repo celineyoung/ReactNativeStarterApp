@@ -9,9 +9,10 @@
  */
 
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TextInput, Button } from "react-native";
+import { StyleSheet, Text, View, TextInput, Button, Alert } from "react-native";
 import { createStackNavigator } from "react-navigation";
 import { TextField } from "react-native-material-textfield";
+//import Alerts from "react-native-alerts";
 
 class LoginScreen extends React.Component {
   static navigationOptions = {
@@ -33,12 +34,13 @@ class LoginScreen extends React.Component {
           onChangeText={text => this.setState({ text })}
         />
         <Button
-          style={{marginLeft: 10, marginRight: 10}}
+          style={{ marginLeft: 10, marginRight: 10 }}
           title="Enter"
           onPress={() => {
             this.props.navigation.navigate("Home", {
               name: this.state.text
             });
+            Alert.alert('Welcome!', 'Welcome to SWEN 325 App, Dear ' + this.state.text + '!');
           }}
         />
       </View>
